@@ -1,0 +1,45 @@
+.completed-orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.completed-orders-table th {
+    background-color: #7D60A9 !important; /* Parent color */
+    color: #ffffff;
+    padding: 10px;
+    text-align: left;
+}
+
+.completed-orders-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.completed-orders-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.completed-orders-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.version-dropdown {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 14px;
+    outline: none;
+}
+
+/* Setting column widths */
+.completed-orders-table th:first-child, .completed-orders-table td:first-child {
+    width: 70%;
+}
+
+.completed-orders-table th:last-child, .completed-orders-table td:last-child {
+    width: 30%;
+}

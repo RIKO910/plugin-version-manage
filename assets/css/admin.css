@@ -1,0 +1,34 @@
+#version_container {
+    margin-top: 10px;
+}
+
+.version_item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.version_item input {
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 40%;
+}
+
+.remove_version {
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.remove_version:hover {
+    background: #c82333;
+}
+
+#main-container-plugin-version{
+    padding: 30px;
+}
