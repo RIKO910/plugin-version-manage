@@ -39,7 +39,54 @@ class PVM_plugin_Version_Manage {
         $this->activation();
         $this->deactivation();
         $this->init_hooks();
+        $this->register_api_route();
     }
+
+    /**
+     * Register REST API route for version management.
+     *
+     * @since 1.0.0
+     */
+    public function register_api_route() {
+        add_action( 'rest_api_init', function() {
+            register_rest_route( 'wooxperto-plugin', '/latest-version/(?P<product_id>\d+)', array(
+                'methods'  => 'GET',
+                'callback' => array( $this, 'get_latest_plugin_version' ),
+                'args'     => array(
+                    'product_id' => array(
+                        'required' => true,
+                        'validate_callback' => function( $param ) {
+                            return is_numeric( $param );
+                        }
+                    ),
+                ),
+            ) );
+        });
+    }
+
+    /**
+     * Callback function for the /latest-version API route.
+     *
+     * @since 1.0.0
+     */
+    public function get_latest_plugin_version( WP_REST_Request $request ) {
+        $product_id       = $request->get_param( 'product_id' );
+        $versions         = get_post_meta( $product_id, '_product_versions', true );
+        $latest_version   = 'N/A';
+
+        if ( ! empty( $versions ) && is_array( $versions ) ) {
+            usort( $versions, function( $a, $b ) {
+                return version_compare( $b['version_name'], $a['version_name'] );
+            });
+
+            $latest_version = $versions[0]['version_name'];
+        }
+
+        return new WP_REST_Response( array(
+            'latest_version' => $latest_version
+        ), 200 );
+    }
+
 
     /**
      * Define Constant.
